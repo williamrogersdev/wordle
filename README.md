@@ -1,4 +1,5 @@
 # wordle game!
+- Still in progress currenly workong on js part
 wordle type game using html, css, js 
 
 
