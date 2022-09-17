@@ -1,4 +1,4 @@
-# wordle
+# wordle game!
 wordle type game using html, css, js 
 
 
