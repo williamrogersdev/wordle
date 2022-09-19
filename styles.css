@@ -3,7 +3,7 @@
 }
 
 body {
-  /* a nice font that uses a user's built in font */
+  /* a nice font that uses a user's built in font. Checks if user has font if not moves on to next*/
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
@@ -23,6 +23,7 @@ body {
   font-size: 30px;
 }
 
+/* Uses grid template colums. basically says there will be 5 things, space them evenly */
 .scoreboard {
   max-width: 295px;
   width: 100%;
@@ -45,6 +46,7 @@ body {
   justify-content: center;
 }
 
+/* correct answer */
 .correct {
   background-color: darkgreen;
   color: white;
@@ -60,6 +62,7 @@ body {
   color: white;
 }
 
+/* does a flash animation */
 .invalid {
   animation: flash 1s;
 }
@@ -75,6 +78,7 @@ body {
   }
 }
 
+/* loading spinner */
 .spiral {
   font-size: 40px;
   animation: spin 1.5s linear infinite;
@@ -89,16 +93,17 @@ body {
 
 /* visibility hidden means the item is still there and taking up space
      but just not shown. display: none doesn't take up space */
-.hidden {
-  visibility: hidden;
-}
 
 .info-bar {
+  visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.show {
+  visibility: visible;
+}
 /* winner animation */
 
 @keyframes rainbow {
