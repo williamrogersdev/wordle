@@ -15,6 +15,18 @@ async function init() {
   let currentGuess = "";
   let currentRow = 0;
 
+  //get word of the day
+  //respone from api
+  const res = await fetch("https://words.dev-apis.com/word-of-the-day");
+  const resObj = await res.json();
+  const word = resObj.word.toUpperCase();
+  const wordParts = word.split("");
+
+  isLoading = false;
+  setLoading(isLoading);
+
+  console.log(word);
+
   //we already know input will be a single letter
   // need to determire what happens when more than 5 chars are typed
   function addLetter(letter) {
@@ -39,8 +51,40 @@ async function init() {
       return;
     }
 
+    // TODO validate the word
+
+    // TODO do all marking as correct, close or wrong
+
+    const guessParts = currentGuess.split("");
+
+    for (let i = 0; i < ANSWER_LENGTH; i++) {
+      //mark as correct
+      if (guessParts[i] === wordParts[i]) {
+        letters[currentRow * ANSWER_LENGTH + i].classList.add("correct");
+      }
+
+      for (let i = 0; i < ANSWER_LENGTH; i++) {
+        if (guessParts[i] === wordParts[i]) {
+          //do nothing alreay done
+          //make this more acrure
+        } else if (wordParts.includes(guessParts[i])) {
+          letters[currentRow * ANSWER_LENGTH + i].classList.add("close");
+        } else {
+          letters[currentRow * ANSWER_LENGTH + i].classList.add("wrong");
+        }
+      }
+    }
+
+    // TODO did they win or lose
+
     currentRow++;
     currentGuess = "";
+  }
+
+  //backspace key functionality
+  function backspace() {
+    currentGuess = currentGuess.substring(0, currentGuess.length - 1);
+    letters[ANSWER_LENGTH * currentRow + currentGuess.length].innerText = "";
   }
 
   document.addEventListener("keydown", function handleKeyPress(event) {
@@ -66,4 +110,9 @@ function isLetter(letter) {
   return /^[a-zA-Z]$/.test(letter);
 }
 
+function setLoading(isLoading) {
+  loadingDiv.classList.toggle("hidden", !isLoading);
+}
+
 init();
+
